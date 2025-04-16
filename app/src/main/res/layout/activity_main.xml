@@ -11,42 +11,59 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="90dp" />
 
         <TextView
             android:id="@+id/Welcome"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="75dp"
-            android:layout_marginVertical="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Welcome"
-            android:textAllCaps="true"
-            android:textSize="50sp" />
+            android:textSize="60sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="90dp" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:src="@tools:sample/avatars" />
+            android:id="@+id/Logo"
+            android:layout_width="match_parent"
+            android:layout_height="332dp"
+            android:background="#003F51B5"
+            android:src="@drawable/poe_logo" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <TextView
-            android:id="@+id/Acro"
-            android:layout_width="wrap_content"
+            android:id="@+id/TCSS"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TCSS" />
+            android:text="TCSS"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="center"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <TextView
-            android:id="@+id/FullName"
-            android:layout_width="wrap_content"
+            android:id="@+id/track"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Track Control Save Succeed" />
+            android:text="Track Control Save Succeed"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
