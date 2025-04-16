@@ -26,7 +26,7 @@
             android:layout_marginVertical="100dp"
             android:text="Welcome"
             android:textAllCaps="true"
-            android:textSize="50dp" />
+            android:textSize="50sp" />
 
         <ImageView
             android:id="@+id/imageView"
