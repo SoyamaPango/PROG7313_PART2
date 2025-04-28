@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">TCSS</string>
+    <string name="homeIntroText">Please select your option.</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="first_name">First Name</string>
+    <string name="surname">Surname</string>
+    <string name="email_address">Email Address</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">SignUp</string>
+    <string name="username">Username</string>
+    <string name="type_in_your_username">Type in your Username</string>
+    <string name="type_in_your_password">Type in your Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password</string>
 </resources>
