@@ -43,33 +43,24 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="Category Limits"
+            android:text="Set Category Limits"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"/>
 
-        <EditText
-            android:id="@+id/foodLimitInput"
-            android:hint="Food category limit"
-            android:inputType="numberDecimal"
+        <Spinner
+            android:id="@+id/spinnerCategory"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <EditText
-            android:id="@+id/transportLimitInput"
-            android:hint="Transport category limit"
+            android:id="@+id/editTextCategoryLimit"
+            android:hint="Enter limit for selected category"
             android:inputType="numberDecimal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/entertainmentLimitInput"
-            android:hint="Entertainment category limit"
-            android:inputType="numberDecimal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/saveBudgetButton"
