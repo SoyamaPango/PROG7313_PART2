@@ -83,7 +83,8 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            tools:ignore="RtlCompat" />
 
 
         <Space
