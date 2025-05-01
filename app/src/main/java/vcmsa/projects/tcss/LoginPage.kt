@@ -54,7 +54,7 @@ class LoginPageActivity : ComponentActivity() {
         }
     }
 
-    private fun hashPassword(password: String): String {
+    private fun hashPassword(password: String): String { //not required
         return try {
             val digest = MessageDigest.getInstance("SHA-256")
             val hashBytes = digest.digest(password.toByteArray())

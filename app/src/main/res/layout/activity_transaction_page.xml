@@ -98,13 +98,14 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
+
                 <EditText
                     android:id="@+id/edtDate"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="dd/mm/yyyy"
+                    android:hint="@string/dd_mm_yyyy"
                     android:inputType="date"
                     android:textColorHint="@color/grey_500" />
             </LinearLayout>
