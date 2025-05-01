@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"/>
 
         <EditText
-            android:id="@+id/editTextCategoryLimit"
+            android:id="@+id/categoryLimit"
             android:hint="Enter limit for selected category"
             android:inputType="numberDecimal"
             android:layout_width="match_parent"
