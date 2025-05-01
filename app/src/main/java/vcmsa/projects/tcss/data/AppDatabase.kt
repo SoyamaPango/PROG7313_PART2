@@ -1,11 +1,9 @@
-
 package vcmsa.projects.tcss.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import vcmsa.projects.tcss.models.Expense
 
 @Database(entities = [Expense::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -19,7 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "expense_database"
+                    "budget_tracker_db"
                 ).build().also { INSTANCE = it }
             }
         }

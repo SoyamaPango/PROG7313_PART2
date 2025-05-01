@@ -23,7 +23,7 @@
             android:name=".DashboardActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.theme.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.TCSS">

@@ -1,15 +1,14 @@
+package  vcmsa.projects.tcss.data
 
-package vcmsa.projects.tcss.data
-
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 
 @Dao
 interface ExpenseDao {
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun insertExpense(expense: Expense)
 
     @Query("SELECT * FROM expenses ORDER BY date DESC")
-    fun getAllExpenses(): LiveData<List<Expense>>
+    suspend fun getAllExpenses(): List<Expense>
 }

@@ -13,6 +13,7 @@ class BudgetActivity : AppCompatActivity() {
 
     private val categories = listOf("Food", "Transport", "Entertainment", "Utilities", "Savings")
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_budgetgoal)
