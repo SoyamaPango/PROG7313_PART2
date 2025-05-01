@@ -15,4 +15,10 @@
     <string name="type_in_your_password">Type in your Password</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="user_balance">User Balance: $</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="dd_mm_yyyy">dd/mm/yyyy</string>
 </resources>

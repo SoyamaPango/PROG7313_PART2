@@ -1,48 +1,28 @@
 package vcmsa.projects.tcss
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import vcmsa.projects.tcss.ui.theme.TCSSTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        enableEdgeToEdge()
-//        setContent {
-//            TCSSTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-//                }
-//            }
-//        }
-    }
-}
+        // Handle the splash screen transition
+        val btnLogin: Button = findViewById(R.id.btnLogin)
+        val btnSignUp: Button = findViewById(R.id.btnSignUp)
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        btnLogin.setOnClickListener {
+            val loginIntent = Intent(this, LoginPageActivity::class.java)
+            startActivity(loginIntent)
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TCSSTheme {
-        Greeting("Android")
+        // Sign up button click listener
+        btnSignUp.setOnClickListener {
+            val signUpIntent = Intent(this, SignUpPageActivity::class.java)
+            startActivity(signUpIntent)
+        }
     }
 }
