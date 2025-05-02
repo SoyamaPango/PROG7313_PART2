@@ -1,4 +1,3 @@
-
 package vcmsa.projects.tcss
 
 import android.os.Bundle
@@ -27,20 +26,25 @@ class TransactionPage : ComponentActivity() {
     }
 
     private fun onSaveButtonClick() {
-        val amountEditText = findViewById<EditText>(R.id.edtAmount)
-        val amountString = amountEditText.text.toString()
-        val amount: Float? = amountString.toFloatOrNull()
+        val amountEditText = findViewById<EditText>(R.id.edtAmount).text.toString()
+        val amount: Float? = amountEditText.toFloatOrNull()
+        val Category: String = findViewById<EditText>(R.id.edtCategory).text.toString()
+        val Date: String = findViewById<EditText>(R.id.edtDate).text.toString()
+        val PaymentType: String = findViewById<EditText>(R.id.edtPaymentMethod).text.toString()
+        val Description: String = findViewById<EditText>(R.id.edtDescription).text.toString()
         if (amount != null) {
             // The string was successfully parsed to a Float
             //store to database
         } else {
             // Handle the error
+            showToast("Enter valid Amount")
         }
-        val Category: String = findViewById<EditText>(R.id.edtCategory).text.toString()
-        val Date: Date = findViewById<EditText>(R.id.edtDate).text.toString()
-        val PaymentType: String = findViewById<EditText>(R.id.edtPaymentMethod).text.toString()
-        val Description: String = findViewById<EditText>(R.id.edtDescription).text.toString()
 
     }
+
+    private fun showToast(message: String) {
+        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show()
+    }
+
 }
 

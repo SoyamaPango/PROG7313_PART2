@@ -21,4 +21,5 @@
     <string name="user_balance">User Balance: $</string>
     <string name="recent_transactions">Recent Transactions</string>
     <string name="dd_mm_yyyy">dd/mm/yyyy</string>
+    <string name="budget_goal">Budget Goal</string>
 </resources>

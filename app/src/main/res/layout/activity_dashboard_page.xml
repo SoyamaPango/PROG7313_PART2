@@ -34,11 +34,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/imgFinacialStat"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/avatar" />
+                android:layout_height="138dp"
+                android:src="@drawable/coming_soon" />
 
             <Space
                 android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/imgTransaction1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,9 +90,9 @@
                     tools:ignore="NestedWeights"
                     android:src="@drawable/avatar" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/imgTransaction2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/avatar" />
@@ -110,14 +110,14 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/imgTransaction3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/avatar" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/imgTransaction4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
