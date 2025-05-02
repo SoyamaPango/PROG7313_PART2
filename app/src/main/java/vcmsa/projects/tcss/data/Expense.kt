@@ -3,12 +3,20 @@ package vcmsa.projects.tcss.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "expenses")
+@Entity(tableName = "expense")
 data class Expense(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+
+   // @ColumnInfo(name = "amount")
     val amount: Double,
+
+  //  @ColumnInfo(name = "date")
     val date: String,
+
+   // @ColumnInfo(name = "description")
     val description: String,
-    val category: String,
-    val imagePath: String? = null
+
+   // @ColumnInfo(name = "category")
+    val category: String
 )

@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import vcmsa.projects.tcss.data.Expense
+import vcmsa.projects.tcss.R
+
 
 class ExpenseAdapter(private val expenseList: List<Expense>) :
     RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {

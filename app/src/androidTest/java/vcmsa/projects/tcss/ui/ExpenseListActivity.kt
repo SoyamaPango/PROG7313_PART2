@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import vcmsa.projects.tcss.R
 import vcmsa.projects.tcss.adapter.ExpenseAdapter
 import vcmsa.projects.tcss.data.AppDatabase
+import vcmsa.projects.tcss.data.Expense
 
 class ExpenseListActivity : AppCompatActivity() {
 
