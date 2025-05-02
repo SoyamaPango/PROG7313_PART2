@@ -6,19 +6,33 @@ import android.widget.EditText
 import android.widget.Toast
 import android.content.Intent
 import androidx.activity.ComponentActivity
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withContext
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.security.MessageDigest
+import vcmsa.projects.tcss.data.UserDAO
 
 
 class LoginPageActivity : ComponentActivity() {
+    private lateinit var db: AppDatabase
+    private lateinit var userDao: UserDAO
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
 
+        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "users.db").build()
+        userDao = db.userDAO()
+
         val Loginbtn = findViewById<Button>(R.id.btnLogin)
         Loginbtn.setOnClickListener {
             onLoginButtonClick()
+        }
+        val backbtn = findViewById<Button>(R.id.btnBack)
+        backbtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -31,27 +45,27 @@ class LoginPageActivity : ComponentActivity() {
             return
         }
 
-        val hashedPaswword = hashPassword(password)
+        val hashedPassword = hashPassword(password)
 
-        //database search fix as needed
-//        val user = withContext(Dispatchers.IO) {
-//            database.userDao().getUserByUsernameAndPassword(userName, hashedPaswword)
-//        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val user = userDao.getUserByUsernameAndPassword(userName, hashedPassword)
 
-//        if (user != null) {
-//            // User found, login successful
-//            Toast.makeText(this@LoginPageActivity, "Login successful!", Toast.LENGTH_SHORT).show()
-//
-//            val intent = Intent(this@LoginPageActivity, DashboardActivity::class.java)
-//            startActivity(intent)
-//        } else {
-//            // User not found
-//            Toast.makeText(
-//                this@LoginPageActivity,
-//                "Invalid username or password",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
+            launch(Dispatchers.Main) {
+                if (user != null) {
+                    Toast.makeText(this@LoginPageActivity, "Login successful!", Toast.LENGTH_SHORT)
+                        .show()
+                    saveUserId(user.id)
+                    val intent = Intent(this@LoginPageActivity, DashboardActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(
+                        this@LoginPageActivity,
+                        "Invalid username or password",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
     private fun hashPassword(password: String): String { //not required
@@ -62,6 +76,13 @@ class LoginPageActivity : ComponentActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
             "" // Handle hashing errors appropriately
+        }
+    }
+
+    private fun saveUserId(userId: Long) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val userPreferences = UserPreferences(this@LoginPageActivity)
+            userPreferences.saveUserId(userId)
         }
     }
 }

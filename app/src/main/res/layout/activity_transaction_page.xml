@@ -160,6 +160,25 @@
                     android:hint="Enter here.."
                     android:inputType="numberDecimal"
                     android:textColorHint="@color/grey_500" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="18dp">
+
+
+                <Button
+                    android:id="@+id/btnUpload"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/upload_image"
+                    android:textColorHint="@color/black" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -169,18 +188,23 @@
 
             </LinearLayout>
 
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="0dp">
 
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="22sp"
+                android:textStyle="bold"
                 android:text="@string/save"
                 android:background="@color/blue_500" />
 
@@ -190,6 +214,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/cancel"
+                android:textStyle="bold"
+                android:textSize="22sp"
                 android:background="@color/grey_500" />
         </LinearLayout>
 

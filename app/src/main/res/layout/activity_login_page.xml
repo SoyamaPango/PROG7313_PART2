@@ -13,6 +13,12 @@
         android:padding="12dp">
 
 
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/back_button" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp" />
@@ -75,15 +81,15 @@
 
         <TextView
             android:id="@+id/lblForgotPassword"
-            android:layout_width="75dp"
-            android:layout_height="25dp"
-            android:text="@string/forgot_password"
+            android:layout_width="89dp"
+            android:layout_height="19dp"
             android:layout_gravity="right"
             android:background="@color/blue_500"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:text="@string/forgot_password"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="10sp"
+            android:textStyle="bold"
             tools:ignore="RtlCompat" />
 
 

@@ -86,21 +86,6 @@
                 android:text="Login" />
 
         </LinearLayout>
-        <Button
-            android:id="@+id/btnAddExpense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Expense"
-            android:layout_marginTop="16dp"
-            />
-
-        <Button
-            android:id="@+id/btnViewExpenses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Expenses"
-            android:layout_marginTop="8dp"
-            />
 
 
     </LinearLayout>
