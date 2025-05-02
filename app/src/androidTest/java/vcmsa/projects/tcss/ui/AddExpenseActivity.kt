@@ -3,7 +3,7 @@ package vcmsa.projects.tcss.ui
 
 import vcmsa.projects.tcss.R
 import vcmsa.projects.tcss.data.AppDatabase
-import vcmsa.projects.tcss.data.Expense
+import vcmsa.projects.tcss.data.Transaction
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -28,10 +28,16 @@ class AddExpenseActivity : AppCompatActivity() {
 
         dateButton.setOnClickListener {
             val calendar = Calendar.getInstance()
-            DatePickerDialog(this, { _, year, month, dayOfMonth ->
-                selectedDate = "$year-${month + 1}-$dayOfMonth"
-                dateButton.text = selectedDate
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(
+                this,
+                { _, year, month, dayOfMonth ->
+                    selectedDate = "$year-${month + 1}-$dayOfMonth"
+                    dateButton.text = selectedDate
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         saveButton.setOnClickListener {
@@ -44,7 +50,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val expense = Expense(
+            val transaction = Transaction(
                 amount = amount,
                 date = selectedDate,
                 description = description,
@@ -52,7 +58,7 @@ class AddExpenseActivity : AppCompatActivity() {
             )
 
             lifecycleScope.launch {
-                AppDatabase.getDatabase(applicationContext).expenseDao().insertExpense(expense)
+                AppDatabase.getDatabase(applicationContext).expenseDao().insertExpense(transaction)
                 finish()
             }
         }

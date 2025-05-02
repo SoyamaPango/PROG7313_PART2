@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import vcmsa.projects.tcss.data.Expense
+import vcmsa.projects.tcss.data.Transaction
 import vcmsa.projects.tcss.R
 
 
-class ExpenseAdapter(private val expenseList: List<Expense>) :
+class ExpenseAdapter(private val transactionList: List<Transaction>) :
     RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
 
     class ExpenseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -26,12 +26,12 @@ class ExpenseAdapter(private val expenseList: List<Expense>) :
     }
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
-        val expense = expenseList[position]
+        val expense = transactionList[position]
         holder.amount.text = "R ${expense.amount}"
         holder.date.text = expense.date
         holder.category.text = expense.category
         holder.description.text = expense.description
     }
 
-    override fun getItemCount() = expenseList.size
+    override fun getItemCount() = transactionList.size
 }

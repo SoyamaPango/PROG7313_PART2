@@ -24,5 +24,7 @@ class MainActivity : ComponentActivity() {
             val signUpIntent = Intent(this, SignUpPageActivity::class.java)
             startActivity(signUpIntent)
         }
+
+
     }
 }

@@ -9,13 +9,13 @@ import kotlinx.coroutines.launch
 import vcmsa.projects.tcss.R
 import vcmsa.projects.tcss.adapter.ExpenseAdapter
 import vcmsa.projects.tcss.data.AppDatabase
-import vcmsa.projects.tcss.data.Expense
+import vcmsa.projects.tcss.data.Transaction
 
 class ExpenseListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ExpenseAdapter
-    private val expenses = mutableListOf<Expense>()
+    private val expens = mutableListOf<Transaction>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +24,14 @@ class ExpenseListActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerViewExpenses)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = ExpenseAdapter(expenses)
+        adapter = ExpenseAdapter(expens)
         recyclerView.adapter = adapter
 
         // Load data from RoomDB
         lifecycleScope.launch {
             val db = AppDatabase.getDatabase(applicationContext)
             val allExpenses = db.expenseDao().getAllExpenses()
-            expenses.addAll(allExpenses)
+            expens.addAll(allExpenses)
             adapter.notifyDataSetChanged()
         }
     }
