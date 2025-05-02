@@ -1,14 +1,10 @@
-package vcmsa.projects.tcss
+package vcmsa.projects.tcss.ui
 
-import android.app.DatePickerDialog
-import android.os.Bundle
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.example.budgettracker.data.AppDatabase
-import com.example.budgettracker.data.Expense
-import kotlinx.coroutines.launch
-import java.util.*
+
+import vcmsa.projects.tcss.R
+import vcmsa.projects.tcss.data.AppDatabase
+import vcmsa.projects.tcss.data.Expense
+
 
 class AddExpenseActivity : AppCompatActivity() {
 
@@ -18,7 +14,6 @@ class AddExpenseActivity : AppCompatActivity() {
     private lateinit var categoryInput: EditText
     private lateinit var saveButton: Button
     private var selectedDate: String = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_expense)
