@@ -1,12 +1,12 @@
-
 package vcmsa.projects.tcss
 
 
 import android.os.Bundle
 import android.widget.*
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 
-class BudgetActivity : AppCompatActivity() {
+class BudgetActivity : ComponentActivity() {
 
     private lateinit var totalBudgetInput: EditText
     private lateinit var spinnerCategory: Spinner
@@ -44,7 +44,8 @@ class BudgetActivity : AppCompatActivity() {
             return
         }
 
-        val message = "Total Budget: R$totalBudget\nCategory: $selectedCategory\nLimit: R$categoryLimit"
+        val message =
+            "Total Budget: R$totalBudget\nCategory: $selectedCategory\nLimit: R$categoryLimit"
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }
