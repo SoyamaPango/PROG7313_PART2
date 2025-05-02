@@ -4,10 +4,13 @@ package vcmsa.projects.tcss.ui
 import vcmsa.projects.tcss.R
 import vcmsa.projects.tcss.data.AppDatabase
 import vcmsa.projects.tcss.data.Expense
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 
 
 class AddExpenseActivity : AppCompatActivity() {
-
     private lateinit var amountInput: EditText
     private lateinit var descriptionInput: EditText
     private lateinit var dateButton: Button
@@ -16,7 +19,6 @@ class AddExpenseActivity : AppCompatActivity() {
     private var selectedDate: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_expense)
 
         amountInput = findViewById(R.id.editAmount)
         descriptionInput = findViewById(R.id.editDescription)

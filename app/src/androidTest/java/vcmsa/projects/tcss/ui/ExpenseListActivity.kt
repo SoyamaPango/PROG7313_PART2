@@ -1,13 +1,14 @@
-package vcmsa.projects.tcss
+package vcmsa.projects.tcss.ui
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import vcmsa.projects.tcss.data.AppDatabase
-import vcmsa.projects.tcss.data.Expense
 import kotlinx.coroutines.launch
 import vcmsa.projects.tcss.R
+import vcmsa.projects.tcss.adapter.ExpenseAdapter
+import vcmsa.projects.tcss.data.AppDatabase
 
 class ExpenseListActivity : AppCompatActivity() {
 
