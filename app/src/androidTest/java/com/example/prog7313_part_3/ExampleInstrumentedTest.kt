@@ -1,4 +1,4 @@
-package vcmsa.projects.tcss
+package com.example.prog7313_part_3
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("vcmsa.projects.tcss", appContext.packageName)
+        assertEquals("com.example.prog7313_part_3", appContext.packageName)
     }
 }

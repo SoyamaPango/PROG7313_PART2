@@ -19,6 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TCSS"
+rootProject.name = "PROG7313_PART_3"
 include(":app")
- 
