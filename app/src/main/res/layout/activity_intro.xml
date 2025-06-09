@@ -27,11 +27,11 @@
 
 
         <ImageView
-            android:id="@+id/app_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_launcher_foreground"
-            app:tint="@color/black"
+            android:id="@+id/app_log"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/tcss_logo"
+            android:layout_gravity="center"
             android:contentDescription="Image indictating the logo of the app." />
 
         <LinearLayout
