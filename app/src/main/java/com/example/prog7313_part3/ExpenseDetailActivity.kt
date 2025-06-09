@@ -1,7 +1,9 @@
 package com.example.prog7313_part3
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import com.example.prog7313_part3.ui.expenses.ExpensesViewModel
+import java.io.File
 
 class ExpenseDetailActivity : AppCompatActivity() {
 
@@ -71,6 +74,21 @@ class ExpenseDetailActivity : AppCompatActivity() {
         binding.textAmount.text = currencyFormat.format(expense.amount)
         binding.textDescription.text = expense.description
         binding.textDate.text = dateFormat.format(date)
+
+        if (!expense.imagePath.isNullOrEmpty()) {
+            val imageFile = File(expense.imagePath)
+            if (imageFile.exists()) {
+                binding.receiptImage.visibility = View.VISIBLE
+                binding.noImageText.visibility = View.GONE
+                binding.receiptImage.setImageURI(Uri.fromFile(imageFile))
+            } else {
+                binding.receiptImage.visibility = View.GONE
+                binding.noImageText.visibility = View.VISIBLE
+            }
+        } else {
+            binding.receiptImage.visibility = View.GONE
+            binding.noImageText.visibility = View.VISIBLE
+        }
     }
 
     private fun setupButtonListeners() {

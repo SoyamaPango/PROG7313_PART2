@@ -1,12 +1,15 @@
 package com.example.prog7313_part3.ui.expenses
 
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.prog7313_part3.entities.Expense
 import com.example.prog7313_part3.databinding.ItemExpenseBinding
+import java.io.File
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -46,11 +49,33 @@ class ExpensesAdapter(private val onItemClick: (Expense) -> Unit) :
             binding.textDescription.text = expense.description
             binding.textDate.text = dateFormat.format(date)
 
+            if (!expense.imagePath.isNullOrEmpty()) {
+                val imageFile = File(expense.imagePath)
+                if (imageFile.exists()) {
+                    binding.expenseImage.visibility = View.VISIBLE
+                    binding.expenseImage.setImageURI(Uri.fromFile(imageFile))
+                } else {
+                    binding.expenseImage.visibility = View.GONE
+                }
+            } else {
+                binding.expenseImage.visibility = View.GONE
+            }
+
             // Set click listener on the item
             binding.root.setOnClickListener {
                 onItemClick(expense)
             }
+
+            class ExpenseDiffCallback : DiffUtil.ItemCallback<Expense>() {
+                override fun areItemsTheSame(oldItem: Expense, newItem: Expense): Boolean {
+                    return oldItem.id == newItem.id
+                }
+
+                override fun areContentsTheSame(oldItem: Expense, newItem: Expense): Boolean {
+                    return oldItem == newItem
+                }
         }
+    }
     }
 
     class ExpenseDiffCallback : DiffUtil.ItemCallback<Expense>() {

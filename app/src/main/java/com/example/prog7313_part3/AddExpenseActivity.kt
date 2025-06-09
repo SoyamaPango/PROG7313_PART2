@@ -1,24 +1,37 @@
 package com.example.prog7313_part3
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.prog7313_part3.entities.Expense
 import java.util.Date
 import com.example.prog7313_part3.databinding.ActivityAddExpenseBinding
 import com.example.prog7313_part3.ui.expenses.ExpensesViewModel
-import kotlin.text.insert
-import kotlin.text.toLong
-
+import java.io.File
+import java.io.FileOutputStream
 
 class AddExpenseActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityAddExpenseBinding
     private lateinit var viewModel: ExpensesViewModel
+    private var selectedImageUri: Uri? = null
+
+    // Replace onActivityResult with ActivityResultLauncher
+    private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        uri?.let {
+            selectedImageUri = it
+            binding.imagePreview.setImageURI(it)
+            binding.imagePreview.visibility = View.VISIBLE
+            binding.btnRemoveImage.visibility = View.VISIBLE
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +53,22 @@ class AddExpenseActivity : AppCompatActivity() {
         binding.btnSaveExpense.setOnClickListener {
             saveExpense()
         }
+        binding.btnAddImage.setOnClickListener {
+            openImagePicker()
+        }
+        binding.btnRemoveImage.setOnClickListener {
+            removeSelectedImage()
+        }
+    }
+
+    private fun openImagePicker() {
+        pickImage.launch("image/*")
+    }
+
+    private fun removeSelectedImage() {
+        selectedImageUri = null
+        binding.imagePreview.visibility = View.GONE
+        binding.btnRemoveImage.visibility = View.GONE
     }
 
     private fun setupCategoryDropdown() {
@@ -62,10 +91,10 @@ class AddExpenseActivity : AppCompatActivity() {
             setOnItemClickListener { _, _, position, _ ->
                 if (position == categories.size - 1) { // Last item
                     // Show custom category input field
-                    binding.layoutCustomCategory.visibility = android.view.View.VISIBLE
+                    binding.layoutCustomCategory.visibility = View.VISIBLE
                 } else {
                     // Hide custom category input field
-                    binding.layoutCustomCategory.visibility = android.view.View.GONE
+                    binding.layoutCustomCategory.visibility = View.GONE
                 }
             }
         }
@@ -134,13 +163,19 @@ class AddExpenseActivity : AppCompatActivity() {
             val sessionManager = SessionManager(applicationContext)
             val userId = sessionManager.getUserId().toLong()
 
-            // Create expense object
+            // Save image to app's files directory if selected
+            val imagePath = selectedImageUri?.let { uri ->
+                saveImageToInternalStorage(uri)
+            }
+
+            // Create expense object with image path
             val expense = Expense(
                 userId = userId,
                 amount = amount,
                 category = category,
-                date = Date().time,  // Current timestamp
-                description = description
+                date = Date().time,
+                description = description,
+                imagePath = imagePath
             )
 
             // Save expense to database
@@ -150,6 +185,30 @@ class AddExpenseActivity : AppCompatActivity() {
             finish()
         } catch (e: Exception) {
             Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun saveImageToInternalStorage(uri: Uri): String? {
+        return try {
+            val inputStream = contentResolver.openInputStream(uri)
+            val receiptsDir = File(filesDir, "expense_receipts")
+            if (!receiptsDir.exists()) {
+                receiptsDir.mkdirs()
+            }
+
+            val fileName = "receipt_${System.currentTimeMillis()}.jpg"
+            val imageFile = File(receiptsDir, fileName)
+
+            inputStream?.use { input ->
+                FileOutputStream(imageFile).use { output ->
+                    input.copyTo(output)
+                }
+            }
+
+            imageFile.absolutePath
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
     }
 

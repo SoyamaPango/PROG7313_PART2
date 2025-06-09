@@ -3,7 +3,6 @@ package com.example.prog7313_part3
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var userRepository: UserRepository
     private lateinit var sessionManager: SessionManager
     private var selectedImageUri: Uri? = null
+    private var currentUser: User? = null
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
@@ -39,11 +39,6 @@ class ProfileActivity : AppCompatActivity() {
         userRepository = UserRepository(database.userDao())
         sessionManager = SessionManager(applicationContext)
 
-        // Pre-fill with email username (before @ symbol)
-        val userEmail = sessionManager.getUserEmail() ?: ""
-        val defaultName = userEmail.substringBefore("@")
-        binding.editTextFirstName.setText(defaultName)
-
         // Setup change photo button
         binding.buttonChangePhoto.setOnClickListener {
             pickImage.launch("image/*")
@@ -52,6 +47,54 @@ class ProfileActivity : AppCompatActivity() {
         // Setup save button
         binding.buttonSaveProfile.setOnClickListener {
             saveUserProfile()
+        }
+
+        // Load existing user data
+        loadUserData()
+    }
+
+    private fun loadUserData() {
+        lifecycleScope.launch {
+            try {
+                val userId = sessionManager.getUserId()
+                if (userId != -1) {
+                    // Get current user from database
+                    val user = userRepository.getUserById(userId)
+
+                    user?.let {
+                        currentUser = it
+
+                        // Set first name and last name fields
+                        binding.editTextFirstName.setText(it.firstName)
+                        binding.editTextLastName.setText(it.lastName)
+
+                        // Update page title to show it's profile editing
+                        binding.textProfileTitle.text = "Edit Your Profile"
+
+                        // Load profile picture if available
+                        it.profilePicturePath?.let { path ->
+                            if (path.isNotEmpty()) {
+                                val imageFile = File(path)
+                                if (imageFile.exists()) {
+                                    val imageUri = Uri.fromFile(imageFile)
+                                    binding.profileImageView.setImageURI(imageUri)
+                                }
+                            }
+                        }
+                    } ?: run {
+                        // Pre-fill with email username if no user found (for new users)
+                        val userEmail = sessionManager.getUserEmail() ?: ""
+                        val defaultName = userEmail.substringBefore("@")
+                        binding.editTextFirstName.setText(defaultName)
+                    }
+                }
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this@ProfileActivity,
+                    "Failed to load profile: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
@@ -68,32 +111,40 @@ class ProfileActivity : AppCompatActivity() {
             try {
                 val userId = sessionManager.getUserId()
                 if (userId != -1) {
-                    // Get current user
-                    val user = userRepository.getUserById(userId) ?: return@launch
+                    if (currentUser == null) {
+                        currentUser = userRepository.getUserById(userId)
+                    }
 
-                    // Save profile picture if selected
-                    val profilePicPath = selectedImageUri?.let { saveProfileImage(it, userId) }
+                    currentUser?.let {
+                        // Create updated user with new values
+                        val updatedUser = User(
+                            id = it.id,
+                            email = it.email,
+                            passwordHash = it.passwordHash,
+                            firstName = firstName,
+                            lastName = lastName,
+                            profilePicturePath = if (selectedImageUri != null) {
+                                saveProfileImage(selectedImageUri!!, userId)
+                            } else {
+                                it.profilePicturePath
+                            }
+                        )
 
-                    // Update user with new information
-                    val updatedUser = user.copy(
-                        firstName = firstName,
-                        lastName = lastName,
-                        profilePicturePath = profilePicPath ?: user.profilePicturePath
-                    )
+                        // Update user in database
+                        userRepository.updateUser(updatedUser)
 
-                    userRepository.updateUser(updatedUser)
+                        // Save the name to session for easy access
+                        sessionManager.saveUserName("$firstName $lastName")
 
-                    // Save the name to session for easy access
-                    sessionManager.saveUserName("$firstName $lastName")
+                        Toast.makeText(
+                            this@ProfileActivity,
+                            "Profile updated successfully!",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                    Toast.makeText(
-                        this@ProfileActivity,
-                        "Profile updated successfully!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    // Navigate to Dashboard
-                    startDashboardActivity()
+                        // Navigate to Dashboard
+                        startDashboardActivity()
+                    }
                 }
             } catch (e: Exception) {
                 Toast.makeText(

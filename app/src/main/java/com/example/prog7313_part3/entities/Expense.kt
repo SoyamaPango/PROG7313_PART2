@@ -19,5 +19,6 @@ data class Expense(
     val amount: Double,
     val category: String,
     val date: Long, // stored as timestamp
-    val description: String
+    val description: String?,
+    val imagePath: String? = null
 )

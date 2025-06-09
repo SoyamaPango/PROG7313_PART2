@@ -13,7 +13,7 @@ import com.example.prog7313_part3.entities.Budget
 
 @Database(
     entities = [User::class, Expense::class, Budget::class],
-    version = 4, // increase when this class has changed
+    version = 5, // increase when this class has changed
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

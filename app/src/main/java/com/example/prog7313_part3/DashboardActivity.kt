@@ -100,6 +100,12 @@ class DashboardActivity : AppCompatActivity() {
         val txtName = headerView.findViewById<TextView>(R.id.txtUsername)
         val imgUser = headerView.findViewById<ImageView>(R.id.imgUser)
 
+        imgUser.setOnClickListener {
+            // Launch ProfileActivity
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         // Set the email
         txtName.text = userName ?: getString(R.string.nav_header_title)
         txtEmail.text = userEmail ?: getString(R.string.nav_header_subtitle)
